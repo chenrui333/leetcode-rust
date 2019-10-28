@@ -11,7 +11,7 @@ jobs:
     name: build and test
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         build: [stable, beta, nightly, macos, windows, msrv]
         include:
@@ -35,6 +35,11 @@ jobs:
             rust: 1.35.0
     steps:
     - uses: actions/checkout@master
+    - name: Install Rust nightly
+      if: matrix.os == 'macOS'
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
     - uses: actions-rs/cargo@v1
       with:
         command: build
