@@ -36,7 +36,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Install Rust nightly
-      if: matrix.os == 'macOS'
+      if: matrix.os == 'macos-latest'
       uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
